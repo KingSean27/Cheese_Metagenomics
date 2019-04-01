@@ -2,4 +2,4 @@
 
 
 All files apart from Data Trim are shell files used for analysis of data. 
-Data Trim is various VBA & Python functions I used to reformat data and filter it using a colour matrix to assign progress to workflow. 
+Data Trim is various VBA & Python functions I used to reformat data and filter it using a colour matrix to assign progress to workflow. Other functions were used but not explicitly renamed for this project, these can be found in the COMP0015 repository.  
