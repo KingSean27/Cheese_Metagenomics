@@ -1,5 +1,5 @@
 
-def main():
+def phyla():
     
     infile = open('input.txt', 'rt')
     outfile = open('output.txt', 'wt')
@@ -17,6 +17,26 @@ def main():
       
         print('.', end='', flush=True)
          
+    outfile.close()
+    print('\ndone.')
+    
+    
+def invert():
+    n = 1
+    prev = ""
+    infile = open('output.txt', 'rt')
+    outfile = open('invert.txt', 'wt')
+    
+    for line in infile:
+        if n % 2 == 0:
+            print(line.rstrip(), file=outfile)
+            print(prev.rstrip(), file=outfile)
+            print('.', end='', flush=True)
+            n += 1
+        else:
+            prev = line
+            n+=1
+                
     outfile.close()
     print('\ndone.')
 
