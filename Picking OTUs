@@ -1,0 +1,37 @@
+#PBS -l select=1:ncpus=16
+#PBS -N Meta2_OTU
+#PBS -A d411-training
+#PBS -j oe
+
+echo "setting temporary directory"
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading virtual environment"
+conda deactivate
+conda activate qiime1
+
+echo "creating and cd to output directory"
+mkdir -p ~/output/Meta2_OTU/
+cd ~/output/Meta2_OTU/
+
+
+echo "Read Join Running..."
+
+time pick_closed_reference_otus.py \
+-i ~/output/Meta2/readjoin/seqs.fna \
+-o output \
+-f -a -O 16
+
+
+echo "Read Join Complete"
+
+
+
+echo "closing environment"
+conda deactivate
+
+### end script
+
+
+
