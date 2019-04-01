@@ -1,0 +1,33 @@
+/bin/bash --login
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=16
+#PBS -N ALPHA
+#PBS -A d411-training
+#PBS -j oe
+
+echo "Setting temporary Qiime directory"
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading Qiime environment"
+conda deactivate
+conda activate qiime1
+
+echo "creating cd to output directory"
+mkdir -p ~/output/pstat/
+cd ~/output/pstat/
+
+echo "Calculating Diversity..."
+
+time compare_alpha_diversity.py -i ~/output/owndataOTU/readjoin/otu_table.biom -o output -s unweighted_unifrac -t ~/output/owndataOTU/readjoin/97_otus.tree
+
+
+echo "Calculation Complete"
+
+echo "closing environment"
+conda deactivate
+
+### end script
+
+~
+~
