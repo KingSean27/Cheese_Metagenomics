@@ -76,3 +76,5 @@ Selection.Cells.Interior.ColorIndex = i
 '6th Strip
 Range("T1:T80").Select
 Selection.Cells.Interior.ColorIndex = i
+
+https://soundcloud.com/user-209448905/rip-harambe1
