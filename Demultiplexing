@@ -1,0 +1,39 @@
+#!/bin/bash --login
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=1
+#PBS -N Readjoin_Team8_Cheese_Data
+#PBS -A d411-training
+#PBS -j oe
+
+### script start
+
+echo "setting temporary directory"
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading virtual environment"
+conda deactivate
+conda activate qiime1
+
+echo "creating and cd to output directory"
+mkdir -p ~/output/readjoin_data/
+cd ~/output/readjoin_data/
+
+# QIIME Code
+
+echo "Demultiplexing with QIIME defaults"
+echo "Full data set"
+# note: the command below is broken across several lines using backslashes (\)
+# you could also have the code on a single line with spaces instead
+time split_libraries_fastq.py \
+-i ~mbaron/2019/joined_fastq/fastqjoin.join.fastq.gz \
+-b ~mbaron/2019/joined_fastq/fastqjoin.join_barcodes.fastq.gz \
+-m ~/metadata.tsv \
+-o readjoin \
+--rev_comp_barcode --rev_comp_mapping_barcodes
+
+
+echo "closing environment"
+conda deactivate
+
+### end script
