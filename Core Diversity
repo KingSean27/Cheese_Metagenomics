@@ -1,0 +1,32 @@
+#!/bin/bash --login
+#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=36
+#PBS -N Meta2_Divers
+#PBS -A d411-training
+#PBS -j oe
+
+echo "Setting temporary Qiime directory"
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading Qiime environment"
+conda deactivate
+conda activate qiime1
+
+echo "creating cd to output directory"
+mkdir -p ~/output/Meta2Parma/
+cd ~/output/Meta2Parma/
+
+echo "Calculating Diversity..."
+
+time core_diversity_analyses.py -i ~/output/Meta2_OTU/output/otu_table.biom -m ~/Metadata2.tsv -t ~/output/Meta2_OTU/output/97_otus.tree -o ./output -e 80000 -a -O 36 --recover_from_failure
+
+echo "Calculation Complete"
+
+echo "closing environment"
+conda deactivate
+
+### end script
+
+
+
