@@ -1,0 +1,33 @@
+#!/bin/bash --login
+#PBS -l walltime=10:00:00
+#PBS -l select=1:ncpus=16
+#PBS -N GroupSig
+#PBS -A d411-training
+#PBS -j oe
+
+echo "Setting temporary Qiime directory"
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading Qiime environment"
+conda deactivate
+conda activate qiime1
+
+echo "creating cd to output directory"
+mkdir -p ~/output/significance/
+cd ~/output/significance/
+
+echo "Calculating Diversity..."
+
+time group_significance.py -i ~/output/owndataOTU/readjoin/otu_table.biom -m ~/metadata.tsv -c Rind_or_Core -o ./output
+
+
+echo "Calculation Complete"
+
+echo "closing environment"
+conda deactivate
+
+### end script
+
+
+
