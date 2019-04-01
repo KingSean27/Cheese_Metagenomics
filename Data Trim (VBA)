@@ -1,0 +1,13 @@
+Sub RetrieveData()
+
+Dim src As Workbook
+
+Set src = Workbooks.Open("D:\Sean Le Cornu\Desktop\Meta\Input.xls", True, True)
+
+ThisWorkbook.Activate
+
+Range("Input").Formula = src.Worksheets("Output").Range("F3:F24").Formula
+Range("Filtered").Formula = src.Worksheets("Clean").Range("F2").Formula
+
+
+End Sub
